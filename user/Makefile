@@ -35,9 +35,7 @@ binary:
 	else \
 		CHAPTER=$(CHAPTER) python3 build.py ;\
 	fi
-	@$(foreach elf, $(ELFS), \
-		$(OBJCOPY) $(elf) --strip-all -O binary $(patsubst $(TARGET_DIR)/%, $(TARGET_DIR)/%.bin, $(elf)); \
-		cp $(elf) $(patsubst $(TARGET_DIR)/%, $(TARGET_DIR)/%.elf, $(elf));)
+	@python3 copy_target.py "$(ELFS)"
 
 disasm:
 	@$(foreach elf, $(ELFS), \
